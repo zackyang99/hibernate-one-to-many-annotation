@@ -8,21 +8,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+
 
 import zyang.HibernateOne2ManyAnnotation.entity.Category;
 import zyang.HibernateOne2ManyAnnotation.entity.Product;
+import zyang.HibernateOne2ManyAnnotation.util.HibernateUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Configuration configuration = new Configuration().configure();
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
-        
-        // obtains the session
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		 
+	    Session session = factory.getCurrentSession();
         
         //Category category = new Category("Computer");
         
@@ -61,7 +58,9 @@ public class Main {
         session.update(pro);
         session.getTransaction().commit();
         session.close(); 
-        sessionFactory.close();
+        
+        
+        HibernateUtil.shutdown();
         
 	}
 
