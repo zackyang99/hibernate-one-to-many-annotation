@@ -1,7 +1,5 @@
 package zyang.HibernateOne2ManyAnnotation.entity;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,25 +8,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="CATEGORY")
 public class Category {
 	@Id
     @Column(name="CATEGORY_ID")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name="NAME")
 	private String name;
 	
-	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade=CascadeType.ALL)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade=CascadeType.ALL, orphanRemoval = true)
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
 	private Set<Product> products = new HashSet();
 	
 	public Category() {

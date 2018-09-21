@@ -6,13 +6,16 @@
   <session-factory>
     <!-- Database connection settings -->
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_test</property>
-		<property name="hibernate.connection.username">test</property>
-		<property name="hibernate.connection.password">Passw0rd</property>
+	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_test</property>
+	<property name="hibernate.connection.username">test</property>
+	<property name="hibernate.connection.password">Passw0rd</property>
 	<property name="show_sql">true</property>
 	<property name="format_sql">true</property>
 	<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+	<!-- Enable Hibernate's automatic session context management -->
+    <property name="current_session_context_class">thread</property>
+    <!-- <property name="hibernate.id.new_generator_mappings">false</property> -->
      
     <mapping class="zyang.HibernateOne2ManyAnnotation.entity.Category"/>
     <mapping class="zyang.HibernateOne2ManyAnnotation.entity.Product"/>
